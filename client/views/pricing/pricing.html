@@ -1,0 +1,106 @@
+<template name='pricing'>
+    <div class="card">
+        <div class="pad-all card-border">
+            {{#if selectedPlan}}
+                {{> userInfo}}
+            {{else}}
+                {{#if convertedUser}}
+                    {{> payingMember}}
+                {{else}}
+                    {{> plans}}
+                {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name='payingMember'>
+    <div id="showThanks" class="card">
+        <div class="card-border pad-all">
+            <h2>You already got the goods!</h2>
+            <p>You are a {{planPurchased}} member!</p>
+            <p>We thank you for using our service, and please let us know if there is anything we can help with!</p>
+        </div>
+    </div>
+</template>
+
+<template name='plans'>
+    <h2>Pricing</h2>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+        <thead>
+        <tr>
+            <td>&nbsp;</td>
+            <td align="center"><strong style="font-size: 22px">Free</strong><br>
+            $0 / month</td>
+            <td align="center"><strong style="font-size: 22px">Silver</strong><br>
+            $25 / month</td>
+            <td align="center"><strong style="font-size: 22px">Gold</strong><br>
+                $50 / month</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Anytime Q&amp;A</td>
+            <td align="center"><span class="fa fa-check"></span></td>
+            <td align="center" class="m-table"><span class="fa fa-check"></span></td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr>
+<!--         <tr>
+            <td>Schedule in Advance</td>
+            <td align="center"><span class="fa fa-check"></span></td>
+            <td align="center" class="m-table"><span class="fa fa-check"></span></td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr> -->
+        <tr>
+            <td>No Ads</td>
+            <td align="center">&nbsp;</td>
+            <td align="center" class="m-table"><span class="fa fa-check"></span></td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr>
+        <tr>
+            <td>Private Floors</td>
+            <td align="center"><span class="fa fa-check"></span></td>
+            <td align="center" class="m-table"><span class="fa fa-check"></span></td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr>
+        <tr>
+                <td>Custom Time Limits</td>
+                <td align="center"><span class="fa fa-check"></span></td>
+                <td align="center" class="m-table"><span class="fa fa-check"></span></td>
+                <td align="center"><span class="fa fa-check"></span></td>
+                </tr>
+        <tr>
+            <td>Transcript</td>
+            <td align="center">&nbsp;</td>
+            <td align="center" class="m-table"><span class="fa fa-check"></span></td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr>
+        <tr>
+            <td>Floor Metrics</td>
+            <td align="center">&nbsp;</td>
+            <td align="center" class="m-table"><span class="fa fa-check"></span></td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr>
+        <tr>
+            <td>Branded Floors</td>
+            <td align="center">&nbsp;</td>
+            <td align="center" class="m-table">&nbsp;</td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr>
+        <tr>
+            <td>Website Embed</td>
+            <td align="center">&nbsp;</td>
+            <td align="center" class="m-table">&nbsp;</td>
+            <td align="center"><span class="fa fa-check"></span></td>
+        </tr>
+        <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td><a class="btn btn-of btn-blue btn-block Silver" href="#">GET SILVER &nbsp;<span class="fa fa-chevron-right"></span></a></td>
+                <td><a class="btn btn-of btn-blue btn-block Gold" href="#">GET GOLD &nbsp;<span class="fa fa-chevron-right"></span></a></td>
+                </tr>
+        </tbody>
+    </table>
+</template>
+
+

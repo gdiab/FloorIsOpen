@@ -1,0 +1,101 @@
+<template name="fqaPage">
+
+   <div class="pad-all">
+    <h2>Questions from the floor!</h2>
+   </div>
+    <div class="card flex-box">
+        <div class="flex-item points"></div>
+        <div  class="flex-item card-border">
+            <ul class="share">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{fqaShareUrlEncoded}}&t=openfloor" target="_blank" class="btn btn-of btn-black"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="https://twitter.com/intent/tweet?text={{bodyTextAbr}}&hashtags=openfloor&url={{fqaShareUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-twitter"></span></a></li>
+                <li><a href="http://reddit.com/{{fqaShareUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-reddit"></span></a></li>
+                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{fqaShareUrlEncoded}}&title=&summary=&source=" target="_blank" class="btn btn-of btn-black"><span class="fa fa-linkedin"></span></a></li>
+                <li><a href="http://www.tumblr.com/share?v=3&u={{fqaShareUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-tumblr"></span></a></li>
+            </ul>
+            <div class="flex-box card-content">
+                <div class="flex-item profile">
+                    <span class="profile-pic">
+                        <img src="{{hostPic}}">
+                    </span>
+                </div>
+                <div class="flex-item comment">
+                    <h4 class="author">
+                        {{author}} asked <span>{{submittedText}}</span>
+                    </h4>
+                    <p>
+                        {{{breakLines body}}}
+                    </p>
+                </div>
+                <div class="flex-item engage-icons">
+                    <a href="#" class="upvote {{upvotedQuestionClass}}"><span class="fa fa-heart"></span> {{votes}}</a>
+                    <a href="#" class="shareable"><span class="fa fa-share-alt"></span></a>
+                </div>
+            </div>
+
+
+            {{#if answerBody}}
+                <div class="flex-box card-content answerItem">
+                    <div class="flex-item profile">
+                        <span class="profile-pic">
+                            <img src="{{profilePic}}">
+                        </span>
+                    </div>
+                    <div class="flex-item comment">
+                        <h4 class="author">
+                            {{answerAuthor}} answered <span>{{answerSubmittedText}}</span>
+                        </h4>
+                        <p>
+                            {{{breakLines answerBody}}}
+                        </p>
+                    </div>
+                    <div class="flex-item engage-icons">
+                        <a href="#" class="upvote-answer {{upvotedAnswerClass}}"><span class="fa fa-heart"></span> {{answerVotes}}</a>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+
+    </div>
+
+    {{#with floor}}
+    <div class="card floorPage {{floorStatus}}">
+        <div class="status">
+            <a href="{{url}}" class="btn btn-of btn-blue">View More Questions From This Floor</a>
+        </div>
+        <div class="flex-box pad-all user-info">
+            <div class="flex-item profile">
+                <img class="profile-pic" src="{{hostPic}}">
+            </div>
+            <div class="flex-item pad-lr">
+                <span class="name">{{host}}</span><br>
+                <span class="bio-short"></span>
+            </div>
+        </div>
+        <div class="card-border pad-all flex-box">
+            <div class="flex-item pad-lr floor-title">
+                <h1>{{{breakLines title}}}</h1>
+                {{#if description}}
+                    <h4>more info: {{{breakLines description}}}</h4>
+                {{/if}}
+            </div>
+            <div class="flex-item engage-icons">
+                <a href="#" class="shareable"><span class="fa fa-share-alt"></span></a>
+                {{#unless ownFloor }}
+                    <a href="#" class="upvote {{upvotedClass}}"><span class="fa fa-heart"></span> {{votes}}</a>
+                {{/unless}}
+            </div>
+            <ul class="share">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{shortUrl}}&t=openfloor" target="_blank" class="btn btn-of btn-black"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="https://twitter.com/intent/tweet?text={{urlSafe rawTitle}}&hashtags=openfloor&url={{shortUrl}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-twitter"></span></a></li>
+                <li><a href="http://reddit.com/{{url}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-reddit"></span></a></li>
+                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{shortUrlEncoded}}&title=&summary=&source=" target="_blank" class="btn btn-of btn-black"><span class="fa fa-linkedin"></span></a></li>
+                <li><a href="http://www.tumblr.com/share?v=3&u={{shortUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-tumblr"></span></a></li>
+            </ul>
+
+        </div>
+    </div>
+    {{/with}}
+
+
+</template>

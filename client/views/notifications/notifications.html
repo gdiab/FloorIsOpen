@@ -1,0 +1,47 @@
+<!--
+Author: georgediab
+Date: 2014-06-10 00:11:35
+Last Modified by: georgediab
+Last Modified Date: 2014-08-03 23:34:42
+File: notifications.html
+-->
+
+<template name="notifications">
+    <a href="{{pathFor 'notificationsList'}}"  class="closeMenu">
+		Notifications
+		{{#if unseenNotificationCount}}
+			<span class="badge badge-inverse">
+				{{unseenNotificationCount}}
+			</span>
+		{{/if}}
+	</a>
+</template>
+
+<template name="notification">
+	<div  class="alert alert-info">
+        <a href="{{notificationFloorPath}}">
+            <strong>{{notificationName}}</strong>on the floor. {{notificationSeen}} ( {{submittedText}} )
+        </a>
+    </div>
+</template>
+
+<template name="notificationsList">
+    <div class="card">
+    	<div class="card-border pad-all">
+			<h1>Notifications</h1>
+		    {{#if notificationCount}} 
+		    	{{#each notifications}} 
+		    		{{> notification}} 
+				{{/each}} 
+				{{#if moreResults}}
+			    <div class="showMoreResults" style="margin-left: 25px;">
+			        <span class="loading"><a class="btn btn-of btn-blue btn-block load-more" href="{{nextPath}}">Load more</a></span>
+			    </div>
+			{{/if}}	
+			{{else}}
+				<div class="alert">No Notifications</div>
+		    {{/if}}
+		</div>
+
+	</div>
+</template>

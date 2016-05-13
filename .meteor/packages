@@ -1,0 +1,53 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+standard-app-packages
+sacha:spin
+jquery
+accounts-facebook
+accounts-twitter
+meteorhacks:npm
+http
+bitly
+# mrt:facebook-sdk
+# email
+natestrauser:animate-css
+joshowens:simple-form
+# servicelocale:geoip
+gadicohen:headers
+mrt:toastjs
+# openfloor-event-hooks
+georgediab:slack-notify
+openfloor-errors
+percolatestudio:percolatestudio-migrations
+mrt:moment
+kidovate:pnotify
+mizzao:timesync
+spiderable
+openfloor-accounts-ui-bootstrap-3-blaze
+# openfloor-twitter-api
+# openfloor-accounts-twitter
+# twitter
+openfloor-easycron
+openfloor-mandrill
+meteorhacks:fast-render
+djedi:sanitize-html
+manuelschoebel:ms-seo
+brentjanderson:buzz.js
+meteorhacks:subs-manager
+iron:router
+mizzao:bootstrap-3
+datariot:ganalytics
+# accounts-ui
+revolutionlabs:user-login-state
+percolate:intercom
+intercom-api
+openfloor-twitter
+openfloor-stripe
+multiply:iron-router-progress
+
+
+
+npm-container

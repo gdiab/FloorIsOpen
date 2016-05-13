@@ -1,0 +1,22 @@
+<!--
+Author: georgediab
+Date: 2014-07-21 23:30:23
+Last Modified by: georgediab
+Last Modified Date: 2014-07-22 09:03:22
+File: vegastech.html
+-->
+
+<template name='vegastech'>
+  <div id="vegastech">
+    <div class="container d-banner">
+    {{#with ads}}
+    	<a href="{{url}}" target="_blank" rel="{{customer}}" class="ad"><img src="{{imagePath}}"></a>
+    {{/with}}
+    </div>
+    <div class="container m-banner">
+    {{#with ads}}
+    	<a href="{{url}}" target="_blank" rel="{{customer}}" class="ad"><img src="{{smImagePath}}"></a>
+    {{/with}}
+    </div>
+  </div>
+</template>

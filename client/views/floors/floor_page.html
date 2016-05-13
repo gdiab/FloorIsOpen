@@ -1,0 +1,293 @@
+<!--
+Author: georgediab
+Date: 2014-06-02 22:12:08
+Last Modified by: georgediab
+Last Modified Date: 2014-08-09 08:46:19
+File: floor_page.html
+-->
+
+<template name="floorPage">
+    {{#unless isAnswering}}
+        <!-- PROFILE / FLOOR TITLE -->
+        <div class="card floorPage {{floorStatus}}">
+            <!-- STATUS -->
+            {{#if isScheduled}}
+                <div class="status">
+                    The Floor is scheduled to be open {{scheduledText}}
+                </div>
+            {{else}}
+                <div class="status">
+                    The Floor is {{floorStatusText}} for Questions{{#if closingSoon}} but closing soon{{/if}}!
+                </div>
+            {{/if}}
+            <!-- PROFILE / TIME -->
+            <div class="flex-box pad-all user-info">
+                <div class="flex-item profile">
+                    <img class="profile-pic" src="{{hostPic}}" onerror="this.onerror=null;this.src='http://openfloor.co/images/assets/logo-icon.svg';">
+                </div>
+                <div class="flex-item pad-lr">
+                    <span class="name">{{hostText}}</span>
+                    <br>
+                    <!-- <a href="#" class="btn btn-of btn-light btn-sm">Follow {{hostText}}</a> -->
+                </div>
+                <!-- TIME -->
+                <div class="flex-item floor-time time">
+                    {{#if ownFloor }} 
+                        {{#unless isScheduled}} 
+                            {{#if ownFloor }} 
+                                {{openFor}} 
+                            {{/if}}
+                            <a class="add-time animated pulse"><span class="fa fa-plus-square"></span></a>
+                        {{/unless}} 
+                    {{else}} 
+                        {{#if isOpen}} 
+                            {{openFor}} 
+                        {{/if}} 
+                    {{/if}}
+                </div>
+            </div>
+            <!-- TITLE / SHARE -->
+                <div class="flex-box pad-all card-border">
+                    <div class="flex-item floor-title">
+                        <!-- TITLE -->
+                        <h1>{{{breakLines title}}}</h1>
+                        {{#if description}}
+                            <h4>More info: {{{breakLines description}}}</h4>
+                        {{/if}}
+
+                        {{#if isOpen}} 
+                            {{#if ownFloor }}
+                                {{#unless isEvent}}
+                                    <div class="floor-actions">
+                                        <h4>Awaiting questions!</h4>
+                                        <p>Invite others to get the questions started!<br>
+                                            <a href="https://twitter.com/intent/tweet?text=For%20the%20next%2015%20minutes%2C%20I%20am%20holding%20a%20Q%20%26%20A%20on%20%23openfloor%20%20GO%21&url={{shortUrl}}" class="btn btn-large" target="_blank"><span class="fa fa-twitter"></span></a>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{shortUrl}}" target="_blank" class="btn btn-large"><span class="fa fa-facebook-square"></span></a>
+                                            <br>or Share this link: <a href="{{shortUrl}}" target="_blank" class="short-link">{{shortUrl}}</a>
+                                        </p>
+                                    </div>
+                                {{/unless}}
+                            {{else}} 
+                            <!-- ASK A QUESTION / FLOOR MESSAGE -->
+                                {{#if requireLogin}}
+                                    {{#unless currentUser}}
+                                        <div class="floor-actions">
+                                            <h4>Login Required to particpate in this floor.</h4>
+                                            <p><button type="button" class="btn btn-of btn-blue login" name="login">Login</button></p>
+                                        </div>
+                                    {{/unless}}
+                                {{else}} 
+                                    {{#if requireOptIn}}
+                                        <div class="floor-actions">
+                                            <h4>{{optInMessage}}</h4>
+                                            <p><button type="button" class="btn btn-of btn-blue opt-in" name="opt-in">I Agree</button></p>
+                                        </div>
+                                    {{else}}
+                                        <a href="#" class="btn btn-of btn-blue ask-question">Ask a Question</a>
+                                        {{> questionSubmit}} 
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}} 
+                        {{else}}
+                            {{#if isScheduled}}
+                                {{#if ownFloor }}
+                                    <div class="floor-actions">
+                                        <h4>Awaiting questions!</h4>
+                                        <p>Invite others to get the questions started!<br>
+                                            <a href="https://twitter.com/intent/tweet?text=For%20the%20next%2015%20minutes%2C%20I%20am%20holding%20a%20Q%20%26%20A%20on%20%23openfloor%20%20GO%21&url={{shortUrl}}" class="btn btn-large" target="_blank"><span class="fa fa-twitter"></span></a>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{shortUrl}}" target="_blank" class="btn btn-large"><span class="fa fa-facebook-square"></span></a>
+                                            <br>
+                                            {{#if isEvent}} 
+                                                Have your audience visit <a href="http://openfloor.co/events">http://openfloor.co/events</a><br>and use access code: <strong>{{eventCode}}</strong> 
+                                            {{else}} 
+                                                or Share this link: <a href="{{shortUrl}}" target="_blank" class="short-link">{{shortUrl}}</a>
+                                            {{/if}}
+                                        </p>
+                                    </div>
+                                {{else}}
+                                    {{#unless hasEmail}} 
+                                        {{> getEmail reasonText="be notified when this floor is open"}}
+                                    {{else}}
+                                        <p>&nbsp;</p>
+                                        {{#if requireLogin}}
+                                            {{#unless currentUser}}
+                                                <div class="floor-actions">
+                                                    <h4>Login Required to particpate in this floor.</h4>
+                                                    <p><button type="button" class="login btn btn-of btn-blue " name="login">Login</button></p>
+                                                </div>
+                                            {{/unless}}
+                                        {{else}} 
+                                            <h4>Subscribe to be notified 5 minutes before the floor opens.</h4>
+                                            <a href="#" class="btn btn-of btn-blue floor-subscribe {{followedClass}}"><span class="fa fa-envelope"></span>  {{followText}}</a>
+                                            <p><span class="noshow">Currently subscribed: {{followers}}</span></p>
+                                        {{/if}}
+                                    {{/unless}} 
+                                {{/if}} 
+                            {{else}}
+                                {{#if requireLogin}}
+                                    {{#unless currentUser}}
+                                        <div class="floor-actions">
+                                            <h4>You must be logged in to view this floor.</h4>
+                                            <p><button type="button" class="btn btn-of btn-blue login" name="login">Login</button></p>
+                                        </div>
+                                    {{/unless}}
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                    <!-- ENGAGE ICONS -->
+                    <div class="flex-item engage-icons">
+                        {{#unless ownFloor }}
+                            <a href="#" class="upvote {{upvotedClass}}"><span class="fa fa-heart"></span> {{votes}}</a>
+                        {{/unless}} 
+                        {{#if ownFloor }} 
+                            {{#if canEdit}}
+                                <a href="{{ pathFor 'floorEdit' }}" class=""><span class="fa fa-pencil"></span></a>
+                            {{/if}}
+                            {{#if isEvent}}
+                                <span class="fa fa-eye hide-answer-button"></span>
+                            {{/if}}
+                        {{/if}}
+                        <a href="#" class="shareable"><span class="fa fa-share-alt"></span></a>
+                    </div>
+                    <!-- SHARED DOV -->
+                    <ul class="share">
+                        <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-facebook"></span></a></li>
+                        <li><a href="https://twitter.com/intent/tweet?text={{urlSafe rawTitle}}&hashtags=openfloor&url={{shortUrl}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-twitter"></span></a></li>
+                        <li><a href="http://reddit.com/{{url}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-reddit"></span></a></li>
+                        <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{shortUrlEncoded}}&title=&summary=&source=" target="_blank" class="btn btn-of btn-black"><span class="fa fa-linkedin"></span></a></li>
+                        <li><a href="http://www.tumblr.com/share?v=3&u={{shortUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-tumblr"></span></a></li>
+                    </ul>
+            </div>
+        </div>
+            {{#unless requireLogin}} 
+                {{#unless currentUser}}
+                    <div class="questions">
+                        {{#each questions}}
+                            <div>
+                                {{> question}}
+                            </div>
+                        {{/each}} 
+                        {{#if moreResults}}
+                            <div class="showMoreResults" style="margin-left: 25px;">
+                                <span class="loading"><a class="btn btn-of btn-blue btn-block load-more" href="{{nextPath}}">Load more</a>
+                                </span>
+                            </div>
+                        {{/if}}
+                    </div>
+                {{else}} 
+                    {{#if requireOptIn}}
+                <!--     <div class="floor-actions">
+                        <h4>{{optInMessage}}</h4>
+                        <p>
+                            <button type="button" class="btn btn-of btn-blue opt-in" name="opt-in">I Agree</button>
+                        </p>
+                    </div> -->
+                    {{else}}
+                    <div class="questions">
+                        {{#each questions}}
+                            <div>
+                                {{> question}}
+                            </div>
+                        {{/each}} 
+                        {{#if moreResults}}
+                            <div class="showMoreResults" style="margin-left: 25px;">
+                                <span class="loading"><a class="btn btn-of btn-blue btn-block load-more" href="{{nextPath}}">Load more</a>
+                                </span>
+                            </div>
+                        {{/if}}
+                    </div>
+                    {{/if}} 
+                {{/unless}} 
+        {{else}} 
+            {{#unless currentUser}}
+<!--                 <div class="floor-actions">
+                    <h4>Login Required to particpate in this floor.</h4>
+                    <p><button type="button" class="btn btn-of btn-blue login" name="login">Login</button></p>
+                </div> -->
+                {{else}}
+                    {{#unless requireOptIn}}
+                    <div class="floor-actions">
+                        <h4>You need to Opt-In to sharing your contact info with the host to particpate on this floor.</h4>
+                        <p><button type="button" class="btn btn-of btn-blue opt-in" name="opt-in">I Agree</button></p>
+                    </div>
+                    {{/unless}} 
+            {{/unless}} 
+        {{/unless}}
+
+        <div id="openMessage" class="messageWindow">
+            <div class="messageWrap">
+                <a class="close-log"><span class="of-close"></span></a>
+                <h2>You will have 15 minutes to answer questions.</h2>
+                <h2>You can add time by clicking the <span class="fa fa-plus-square add-time"></span>button.</h2>
+                <h2>Share your floor with friends to let them know it's open.</h2>
+            </div>
+        </div>
+
+        <div id="closeMessage" class="messageWindow">
+            <div class="messageWrap">
+                <a class="close-log"><span class="of-close"></span></a>
+                <h2>Your floor is now closed.</h2>
+                <h2>You have a few minutes to answer unanswered questions.</h2>
+                <h2>Let us know what you think of OpenFloor. Click the feedback button at the bottom of the site to let us know.</h2>
+            </div>
+        </div>
+
+    {{/unless}} 
+
+    {{#if isAnswering}} 
+        {{> answerBox}}
+    {{/if}}
+
+
+    <div class="messageWindow profileBox" id="profileBox">
+        {{>profileBox}}
+    </div>
+</template>
+
+<template name="profileBox">		
+    <div class="messageWrap">
+        <a class="close-log">
+            <span class="of-close"></span>
+        </a>
+        
+        <h3 class="text-center">
+			<h1>{{name}}</h1>
+            <div class="flex-item profile">
+                <img src="{{image}}">
+            </div>
+            <br>{social share icons}
+            <br>{{bio}}
+            <br>{follow link}
+            <br>{bio link}
+        </h3>
+    </div>
+</template>
+
+<template name="answerBox">
+    <div class="flex-box" id="answerTime">
+        <div class="flex-item ">
+            Time Left on the Floor: {{openFor}}
+            <a class="add-time animated pulse">
+                <span class="fa fa-plus-square"></span>
+            </a>
+        </div>
+    </div>
+    <div class="messageWindow theanswer active" id="{{questionId}}">
+        <div class="messageWrap">
+            <h3 class="text-center">
+                {{{breakLines questionBody}}}
+            </h3>
+            <form name="answer{{_id}}">
+                <input name="questionId" type="hidden" value="{{questionId}}">
+                <input name="floorId" type="hidden" value="{{_id}}">
+                <textarea name="body" class="form-control" style="margin-bottom: 10px;" rows="5" maxlength="1000"></textarea>
+                <a href="#" class="flag-question btn btn-danger pull-right">
+                    <span class="fa fa-flag"></span>
+                </a>
+                <button type="submit" class="btn btn-of btn-blue">Send</button>
+                <button type="button" class="btn btn-of btn-blue cancel flipB">Cancel</button>
+            </form>
+        </div>
+    </div>
+</template>

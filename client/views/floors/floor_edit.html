@@ -1,0 +1,22 @@
+<!--
+Author: georgediab
+Date: 2014-06-06 11:31:39
+Last Modified by: georgediab
+Last Modified Date: 2014-07-27 13:03:18
+File: floor_edit.html
+-->
+
+<template name="floorEdit">
+	<div class="card gen-form">
+		<form class="pad-all card-border">
+			<h2>Edit Your Floor</h2>
+			<textarea name="title" placeholder="ideas: your name, your profession, your experience" class="form-control question" rows="3" maxlength="95">{{title}}</textarea>
+			<textarea name="description" placeholder="ideas: your name, your profession, your experience" class="form-control question" rows="3" maxlength="95">{{description}}</textarea>
+			<div class="controls clearfix">
+				<input type="submit" value="Update" class="btn btn-of btn-blue submit pull-left"/>
+				<a class="btn btn-of btn-blue delete pull-right" href="#"><span class="fa fa-trash-o"></span></a> 
+				<a href="#" class="btn btn-of btn-blue cancel pull-right" style="margin-right: 10px;">Cancel</a> 
+			</div>
+		</form>
+	</div>
+</template>

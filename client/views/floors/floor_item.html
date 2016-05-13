@@ -1,0 +1,47 @@
+<!--
+Author: georgediab
+Date: 2014-05-23 01:17:11
+Last Modified by: georgediab
+Last Modified Date: 2014-08-09 08:47:41
+File: floor_item.html
+-->
+
+<template name="floorItem">
+	<div class="invisible card flex-box" {{attributes}}>
+		<div class="card-col flex-item floor-status {{floorStatus}}">
+		  <a href="{{pathFor 'floorPage'}}" class="profile"><img class="profile-pic" src="{{hostPic}}" width="48" height="48" onerror="this.onerror=null;this.src='http://openfloor.co/images/assets/logo-icon.svg';"></a>
+		  <span class="status">
+			  {{#if isOpen}}
+			  	<i class="fa fa-clock-o"></i>
+			  {{/if}} 
+			  {{floorStatusText}}
+		  </span>
+		  <span class="time">{{#if isOpen}}{{openFor}}{{/if}}</span>
+		</div>
+		<div class="card-col card-border">
+			<div class="card-content flex-box">
+				<div class="floor-content">
+					<h3><a href="{{pathFor 'floorPage'}}">{{{title}}}</a></h3>
+					<div class="qa-icons">
+						<a href="{{pathFor 'floorPage'}}" class="questions"><span class="fa fa-comment"></span> {{pluralize questionsCount "Question"}}</a>
+						<a href="{{pathFor 'floorPage'}}" class="answers"><span class="fa fa-comment"></span> {{pluralize answersCount "Answer"}}</a>
+						<a href="{{pathFor 'floorPage'}}" class="votes"><span class="fa fa-heart"></span> {{votes}}</a>
+					</div>
+				</div>
+				<div class="engage-icons">
+					{{#unless ownFloor}}
+						<a href="#" class="upvote {{upvotedClass}}"><span class="fa fa-heart "></span></a>
+					{{/unless}}
+					<a href="#" class="shareable"><span class="fa fa-share-alt"></span></a>
+				</div>
+			</div>
+		</div>
+		<ul class="share"> 
+		    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{url}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-facebook"></span></a></li>
+		    <li><a href="https://twitter.com/intent/tweet?text=The Floor is Open!&hashtags=openfloor&url={{shortUrl}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-twitter"></span></a></li>
+		    <li><a href="http://reddit.com/{{url}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-reddit"></span></a></li>
+		    <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{shortUrlEncoded}}&title=&summary=&source=" target="_blank" class="btn btn-of btn-black"><span class="fa fa-linkedin"></span></a></li>
+		    <li><a href="http://www.tumblr.com/share?v=3&u={{shortUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-tumblr"></span></a></li>
+		</ul>
+	</div>
+</template>

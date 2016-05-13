@@ -1,0 +1,83 @@
+<!--
+Author: georgediab
+Date: 2014-06-02 23:04:11
+Last Modified by: georgediab
+Last Modified Date: 2014-07-30 23:15:55
+File: header.html
+-->
+
+<template name="header">
+    {{#if currentUser}} {{> toaster}} {{/if}}
+    <div id="header">
+        <div class="header clearfix">
+            <button type="button" class="navbar-toggle pull-right">
+                <span class="fa fa-navicon"></span>
+            </button>
+            <a class="logo pull-left" href="{{pathFor 'main'}}"></a>
+            <ul class="nav navbar-nav navbar-right">
+                {{#if hasOpenFloor}}
+                <!--
+				<li class="">
+					Your floor is open!
+				</li>
+				-->
+                {{/if}}
+                {{#unless isEvent}}
+                    <li class="{{activeRouteClass 'main' 'newFloors'}}"><a href="{{pathFor 'newFloors'}}" class="btn btn-link top-nav closeMenu">Active</a></li>
+                    <li class="{{activeRouteClass 'bestFloors'}}"><a href="{{pathFor 'bestFloors'}}" class="btn btn-link top-nav closeMenu">Popular</a></li>
+                    <li class="{{activeRouteClass 'pricing'}}"><a href="{{pathFor 'pricing'}}" class="btn btn-link top-nav closeMenu">Pricing</a></li>
+                {{/unless}}
+
+                {{#unless isEvent}}
+                    {{#if currentUser}}
+                        <li class="{{activeRouteClass 'floorSubmit'}}"><a href="{{pathFor 'floorSubmit'}}" class="btn btn-of btn-blue closeMenu">Open the Floor</a></li>
+                    {{else}}
+                        <li><a class="btn btn-of btn-blue login">Open the Floor</a></li>
+                    {{/if}}
+                {{/unless}} 
+
+                {{#if currentUser}}
+                    <li class="dropdown user-pic-wrap">
+                        <a href="#" class="dropdown-toggle user-pic" data-toggle="dropdown">
+        					{{#if pic}} 
+        					   <img src="{{pic}}" onerror="this.onerror=null;this.src='http://openfloor.co/images/assets/logo-icon.svg';">
+        					{{/if}} 
+    					</a>
+                        <ul class="dropdown-menu" role="menu">
+                            {{#if currentUser}}
+                                <li class="{{activeRouteClass 'myFloors'}}"><a href="{{pathFor 'myFloors'}}" class="closeMenu">My Floors</a></li>
+                            {{/if}}
+                            <li>{{> notifications}}</li>
+                            <li><a href="{{pathFor 'profilePage'}}" class="closeMenu">Profile</a></li>
+                            <li><a href="#" class="closeMenu" id="login-buttons-logout">Logout</a></li>
+                        </ul>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+
+    {{#unless currentUser }}
+        <div id="loginMenu">
+            <div class="login-wrap">
+                <a class="close-log">
+                    <span class="of-close"></span>
+                </a>
+                {{> loginButtons }}
+            </div>
+        </div>
+    {{/unless }}
+    {{#if currentUser}}
+        {{#unless hasEmail}}
+            <div id="getEmail">
+                <div class="login-wrap">
+                    <a class="close-log">
+                        <span class="of-close"></span>
+                    </a>
+                    {{> getEmail reasonText="properly communicate with you"}}
+                </div>
+            </div>
+        {{/unless}}
+    {{/if}}
+    <div id="navopen"></div>
+</template>

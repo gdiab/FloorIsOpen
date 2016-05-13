@@ -1,0 +1,85 @@
+<!--
+Author: georgediab
+Date: 2014-06-08 19:58:03
+Last Modified by: georgediab
+Last Modified Date: 2014-08-09 18:26:54
+File: question.html
+-->
+
+<template name="question">
+
+    <div class="card flex-box">
+        <!-- <div class="points"></div> -->
+        <div class="card-border">
+            <ul class="share">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{fqaShareUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="https://twitter.com/intent/tweet?text={{urlSafe bodyTextAbr}}&hashtags=openfloor&url={{fqaShareUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-twitter"></span></a></li>
+                <li><a href="http://reddit.com/{{fqaShareUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-reddit"></span></a></li>
+                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{fqaShareUrlEncoded}}&title=&summary=&source=" target="_blank" class="btn btn-of btn-black"><span class="fa fa-linkedin"></span></a></li>
+                <li><a href="http://www.tumblr.com/share?v=3&u={{fqaShareUrlEncoded}}" target="_blank" class="btn btn-of btn-black"><span class="fa fa-tumblr"></span></a></li>
+            </ul>
+            <div class="flex-box card-content">
+                <div class="profile">
+                    <span class="profile-pic"><img src="{{authorPic}}" data-id="{{authorId}}" onerror="this.onerror=null;this.src='http://openfloor.co/images/assets/logo-icon.svg';"></span>
+                </div>
+                <div class="flex-item comment">
+                    <h4 class="author">{{authorText}} asked <span>{{submittedText}}</span></h4>
+                    <p>{{{breakLines body}}}</p>
+                </div>
+                <div class="engage-icons">
+                
+                    <a href="#" class="upvote {{upvotedQuestionClass}}"><i class="fa fa-heart"></i> {{votes}}</a>
+                    <a href="#" class="shareable"><span class="fa fa-share-alt"></span></a>
+                </div>
+            </div>
+
+
+            {{#if isOpen}}
+                {{#unless answerBody}}
+                    {{#if ownFloor }}
+                        <div class="card-content answerItem {{answerShow}}">
+                            <a href="#" class="answerQuestion btn btn-of btn-blue">Answer</a>
+                        </div>
+                    {{/if}}
+                    <!-- <div class="messageWindow theanswer {{openAnswerQuestion}}" id="{{_id}}">
+                        <div class="messageWrap">
+                            <h3 class="text-center">
+                                {{{breakLines body}}}
+                            </h3>
+                            <form name="answer{{_id}}">
+                                <input name="questionId" type="hidden" value="{{_id}}">
+                                <textarea name="body" class="form-control" style="margin-bottom: 10px;" rows="5" maxlength="1000"></textarea>
+                                {{#if ownFloor }}
+                                <a href="#" class="flag-question btn btn-danger pull-right">
+                                    <span class="fa fa-flag"></span>
+                                </a>{{/if}}
+                                <button type="submit" class="btn btn-of btn-blue">Send</button>
+                                <button type="button" class="btn btn-of btn-blue cancel flipB">Cancel</button>
+                            </form>
+                        </div>
+                    </div> -->
+    		 	{{/unless}} 
+            {{/if }}
+
+            {{#if answerBody}}
+                <div class="flex-box card-content answerItem">
+                    <div class="profile">
+                        <span class="profile-pic">
+                            <img src="{{profilePic}}" data-id="{{profileId}}" onerror="this.onerror=null;this.src='http://openfloor.co/images/assets/logo-icon.svg';">
+                        </span>
+                    </div>
+                    <div class="comment">
+                        <h4 class="author">{{answerAuthorText}} answered <span>{{answerSubmittedText}}</span></h4>
+                        <p>{{{breakLines answerBody}}}</p>
+                    </div>
+                    <div class="engage-icons">
+                        <a href="#" class="upvote-answer {{upvotedAnswerClass}}"><span class="fa fa-heart"></span> {{answerVotes}} </a>
+                        <a href="#" class="shareable"><span class="fa fa-share-alt"></span></a>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+

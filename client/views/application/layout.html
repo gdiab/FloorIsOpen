@@ -1,0 +1,58 @@
+<!--
+Author: georgediab
+Date: 2014-06-12 21:45:06
+Last Modified by: georgediab
+Last Modified Date: 2014-08-07 22:09:43
+File: layout.html
+-->
+
+<template name="landingLayout">
+  <!-- {{> meteorErrors}} -->
+  {{> yield}}
+</template>
+
+<template name="layout">
+	{{> header}}
+	<div id="pageWrap">
+		<div class="container-fluid" id="mainContent">
+			<div id="main" class="row-fluid clearfix">
+				<div id="left-side">
+					{{> yield}}
+				</div>
+				<div id="right-side">
+					{{> yield region='vegastech'}}
+				</div>
+			</div>
+		</div>
+		{{> footer}}
+	</div>
+</template>
+
+<template name="layoutNoAds">
+	{{> header}}
+	<div id="pageWrap">
+		<div class="container-fluid" id="mainContent">
+			<div id="main" class="row-fluid clearfix">
+				{{> yield}}
+			</div>
+		</div>
+		{{> footer}}
+	</div>
+</template>
+
+<template name="layoutEvents">
+	{{> headerEvents}}
+	<div id="pageWrap">
+		<div class="container-fluid" id="mainContent">
+			<div id="main" class="row-fluid clearfix">
+				<div id="left-side">
+					{{> yield}}
+				</div>
+				<div id="right-side">
+					{{> yield region='vegastech'}}
+				</div>
+			</div>
+		</div>
+		{{> footer}}
+	</div>
+</template>

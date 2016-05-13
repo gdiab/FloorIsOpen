@@ -1,0 +1,126 @@
+<!--
+Author: georgediab
+Date: 2014-06-03 21:38:04
+Last Modified by: georgediab
+Last Modified Date: 2014-08-02 20:00:26
+File: floor_submit.html
+-->
+
+<template name="floorSubmit">
+    <div class="card gen-form">
+		{{#if hasEmail}}  {{#unless hasOpenedFloor}}
+			<form class="pad-all card-border">
+    			<h2>Open the Floor</h2>
+				<textarea name="title" placeholder="ideas: I am ... your name, your profession, your experience...ask me anything!" class="form-control question" rows="4" maxlength="95"></textarea>
+				<textarea name="description" placeholder="description: more ideas on what you would like to be asked." class="form-control question" rows="3" maxlength="500"></textarea>
+	            <div class="floor-schedule">
+		            <div class="well schedule">
+			            <h2 class="sub">When do you want to open the floor?</h2>
+			            <div class="schedule-options flex-box">
+			            	<div class="schedule-date flex-item">
+			            		<span class="fa fa-chevron-up day-arrow" data-direction="up"></span>
+			             		<span class="schedule-day">Now</span>
+			            		<span class="fa fa-chevron-down day-arrow" data-direction="down"></span>
+			            	</div>
+			            	<div class="schedule-time flex-item noshow">
+			            		<span class="fa fa-chevron-up time-arrow" data-direction="up"></span>
+			            		<span class="schedule-hour"></span>
+			            		<span class="fa fa-chevron-down time-arrow" data-direction="down"></span>
+			            	</div>
+                            <input name="open-on-client" class="set-due-date form-control" type="hidden" />
+                            .
+			        	</div>
+			        </div>
+                </div>
+			        {{#if userUpgraded}}
+                        <div class="floor-options noshow">
+    		            	<div class="well form-group">
+    		            		<h2 class="sub">Private Floor?</h2>
+    		            		<p class="">A private floor is a floor only visible by sharing your OpenFloor url.</p>
+    			                <input name="private" type="checkbox" />
+    			                <label for="private">Private Floor</label>
+    			            </div>
+                            <div class="well form-group">
+                                <h2 class="sub">Event Floor?</h2>
+                                <p class="">Make the floor accessible through an event code.</p>
+                                <input name="event-code" class="set-due-date form-control" autocapitalize="off" autocorrect="off" type="text" />
+                            </div>
+                            <div class="well form-group">
+                                <h2 class="sub">Require Login?</h2>
+                                <p class="">Require a user to be logged in before viewing floor?</p>
+                                <input name="require-login" type="checkbox" />
+                                <label for="require-login">Require Logged In User</label>
+                            </div>
+                            <div class="well">
+                                <div class=" form-group">
+                                    <h2 class="sub">Require Opt-in?</h2>
+                                    <p class="">Would you like to receive particpant information (i.e. name/email)</p>
+                                    <input id="require-opt-in" name="require-opt-in" type="checkbox" />
+                                    <label for="require-opt-in">Require Opt-in</label>
+                                </div>
+                                <div class="form-group noshow opt-in-message">
+                                    <h2 class="sub">Opt-in Message</h2>
+                                    <p class="">An opt-in message will be displayed to the participant prior to opening the floor.</p>
+                                    <textarea name="opt-in-message" placeholder="" class="form-control" rows="3" maxlength="250">By participating in this floor you agree to allow the host to have your contact information. Don't worry, we won't spam or share your information with anyone else.
+                                    </textarea>
+                                </div>
+                            </div>
+
+    				        <div class="well form-group">
+    							<h2 class="sub">Open For Time</h2>
+    							<p>How many minutes would you like the floor to be open?</p>
+    				            <select name="open-for">
+    			            		<option value="15" selected="selected">15 Minutes</option>
+    			            		<option value="30">30 Minutes</option>
+    			            		<option value="60">60 Minutes</option>
+    			            		<option value="90">90 Minutes</option>
+    			            		<option value="120">2 Hours</option>
+    			            	</select>
+    			            </div>
+    			            <div class="well form-group">
+    							<h2 class="sub">Answer Time:</h2>
+    							<p>How many minutes do you need to answer questions??</p>
+    				            <select name="cooldown">
+    			            		<option value="15" selected="selected">15 Minutes</option>
+    			            		<option value="30">30 Minutes</option>
+    			            		<option value="60">60 Minutes</option>
+    			            		<option value="90">90 Minutes</option>
+    			            		<option value="120">2 Hours</option>
+    			            		<option value="360">6 Hours</option>
+    			            		<option value="1440">24 Hours</option>
+    			            	</select>
+    						</div>
+                        </div>
+					{{/if}}
+
+	            <div class="flex-box">
+                	{{#if userUpgraded}}<a class="btn btn-of btn-orange btn-right flex-item floor-side-btn" id="btnFloorOptions"><span class="fa fa-cog"></span></a>{{/if}}
+                	<input type="submit" value="Open the Floor" class="btn btn-of btn-blue flex-item" id="btnFloorOpen" />
+                	<a class="btn btn-of btn-black btn-right flex-item  floor-side-btn" id="btnFloorHelp"><span class="fa fa-question-circle"></span></a>
+	            </div>
+			</form>
+		{{/unless}} {{else}} {{> getEmail reasonText="open the floor"}} {{/if}}
+    </div>
+
+	<div id="helpSubmit" class="messageWindow">
+		<div class="messageWrap">
+	  		<a class="close-log"><span class="of-close"></span></a>
+			<h2>You will have 15 minutes to answer questions. </h2>
+			<h2>You can add time by clicking the <span class="fa fa-plus-square add-time"></span> button.</h2>
+			<h2>Share your floor with friends to let them know it's open.</h2>
+		</div>
+	</div>
+
+</template>
+
+<template name="getEmail">
+    <form class="card-border pad-all">
+        <p>To {{this.reasonText}}, we must have your email address.</p>
+        <div class="form-group">
+            <input name="email" type="text" value="" autocapitalize="off" autocorrect="off" placeholder="Please enter your email here!" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-of btn-block btn-blue" />
+        </div>
+    </form>
+</template>

@@ -1,0 +1,21 @@
+<!--
+Author: georgediab
+Date: 2014-05-23 01:06:22
+Last Modified by: georgediab
+Last Modified Date: 2014-06-14 00:04:11
+File: floors_list.html
+-->
+
+<template name="floorsList">
+	<div class="floors">
+		{{#each floorsWithRank}}
+		<div>
+			{{> floorItem}}
+		</div>
+		{{/each}}
+
+		{{#if nextPath}}
+			<a class="btn btn-of btn-blue btn-block load-more" href="{{nextPath}}">Load more</a>
+		{{/if}}
+	</div>
+</template>

@@ -1,0 +1,97 @@
+<!--
+Author: georgediab
+Date: 2014-07-20 14:31:10
+Last Modified by: georgediab
+Last Modified Date: 2014-08-10 15:40:37
+File: profile.html
+-->
+
+<template name='profilePage'>
+	<div id="profile" class="card gen-form ">
+		<div class="flex-box card-border pad-all">
+<!-- 			<div class="flex-item" id="profile-left" style="width: 200px;">
+				<div style="height: 150px; width: 150px; background: red;"><img src="{{pic}}" /></div>
+				<ul>
+				  <li><a href="#" data-target="showProfile">Profile</a></li>
+				  <li><a href="#" data-target="showPlan">Plan</a></li>
+				  <li><a href="#" data-target="showMyFloors">My Floors</a></li>
+				  <li><a href="#" data-target="showFollowers">Followers</a></li>
+				  <li><a href="#" data-target="showPreferences">Notifcation Preferences</a></li>
+				  <li><a href="#" data-target="showNotifications">Notifications</a></li>
+				  <li><a href="#" data-target="logout" class="logout">Logout</a></li>
+				</ul>
+			</div> -->
+		
+			<div class="flex-item">
+				<div id="showProfile" class="profile-info active">
+					<h1>Profile</h1>
+					<form class="">
+						{{#each profileFields}}
+							{{> _profileField}}
+						{{/each}}
+						{{submit_button 'Update Profile' class="btn-of btn-block btn-blue"}}
+					</form>
+					{{#if showPreview}}
+						<h2>Preview Profile</h2>
+						{{> userCard }}
+					{{/if}}
+				</div>
+<!-- 
+				<div id="showPlan" class="profile-info">
+					<h1>Plan</h1>
+					<h2>Upgrade!</h2>
+				</div>
+
+				<div id="showMyFloors" class="profile-info">
+					<h1>My Floors</h1>
+				</div>
+
+				<div id="showFollowers" class="profile-info">
+					<h1>Followers</h1>
+				</div>
+
+				<div id="showPreferences" class="profile-info">
+					<h1>Notifcation Preferences</h1>
+				</div>
+
+				<div id="showNotifications" class="profile-info">
+					{{> notificationsList }}
+				</div> -->
+    		</div>
+		</div>
+  </div>
+
+</template>
+
+<template name="_profileField">
+  {{getLocation}}
+  {{#if isTextField }}
+    <div class="form-group">
+      {{#with profile}}
+          {{text_field ../name type=../type required=../required hint=../hint placeholder=../placeholder afterAddon=../afterAddon class="profileField"}}
+      {{/with}}
+    </div>
+  {{/if}}
+
+  {{#if isTextArea }}
+    <div class="form-group">
+      {{#with profile}}
+          {{text_area ../name type=../type required=../required hint=../hint placeholder=../placeholder afterAddon=../afterAddon class="profileField"}}
+      {{/with}}
+    </div>
+  {{/if}}
+
+  {{#if isCheckbox}}
+    <div class="checkbox">
+      {{#with profile}}
+        {{check_box name label=label required=required}}
+      {{/with}}
+    </div>
+  {{/if}}
+
+  {{#if isFileField }}
+    <div class="form_group">
+      {{> file_field object=profile field=name}}
+    </div>
+  {{/if}}
+</template>

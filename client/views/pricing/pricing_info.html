@@ -1,0 +1,34 @@
+<template name='pricingInfo'>
+    {{#if convertedUser}} 
+    	<div id="showThanks" class="card">
+	        <div class="card-border pad-all">
+	            <h2>SUCCESS!</h2>
+	            <p>You are now a {{planSelected}} member!</p>
+	            <p>We thank you for using our service, and please let us know if there is anything we can help with!</p>
+	        </div>
+	    </div>
+    {{else}}
+	    <div id="userInfo">
+	        <div class="card">
+	            <form name="pricing" class="card-border pad-all pricing-form">
+	            <h2>Plan selected: {{planSelected}} @ {{planPrice}} per month.</h2>
+	                <div class="form-group">
+	                    <input name="first_name" type="text" value="{{userFirstName}}" placeholder="Please enter your first name here!" class="form-control" required/>
+	                </div>
+	                <div class="form-group">
+	                    <input name="last_name" type="text" value="{{userLastName}}" placeholder="Please enter your last name here!" class="form-control" required />
+	                </div>
+	                <div class="form-group">
+	                    <input name="email" type="text" value="{{userEmail}}" placeholder="Please enter your email here!" class="form-control" required />
+	                </div>
+
+	               
+	                {{> stripeEasyInputs}}
+  					 <div class="form-group">
+	                    <input type="submit" value="Upgrade Now!" class="btn btn-of  btn-block btn-blue" />
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+    {{/if}}
+</template>	
