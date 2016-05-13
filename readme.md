@@ -56,4 +56,8 @@ I suggest a little batch file to set these and run meteor, as it can become a bu
     }
 }
 ```
+To make use of the settings file, run meteor like this:
 
+```
+meteor --settings settings.json
+```
